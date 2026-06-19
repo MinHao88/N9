@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Game Hall</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- 顶部 Header -->
+    <header class="app-header">
+        <div class="logo-area">
+            <div class="logo-icon"><i class="fas fa-gamepad"></i></div>
+            <span data-i18n="appName">娱乐城</span>
+        </div>
+        <div class="header-actions">
+            <div class="lang-switch" onclick="toggleLang()">
+                <span id="current-lang">中文</span> <i class="fas fa-globe"></i>
+            </div>
+            <div class="lang-switch" onclick="toggleDarkMode()" title="Dark Mode">
+                <i class="fas fa-moon"></i>
+            </div>
+            <div class="download-btn" data-i18n="download">立即下载</div>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <!-- 首页 -->
+        <div id="page-home" class="page active">
+            <div class="home-banner-section">
+                <div class="auth-buttons">
+                    <button class="btn-login" onclick="openModal('login')" data-i18n="login">登录</button>
+                    <button class="btn-register" onclick="openModal('register')" data-i18n="register">注册</button>
+                </div>
+                
+                <div class="swiper-container">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide" style="background-image: linear-gradient(45deg, #0056b3, #00a8ff);">
+                            <div class="banner-text" data-i18n="banner1">电子 超高爆率</div>
+                            <div class="jackpot-number">125,156,046.23</div>
+                        </div>
+                        <div class="swiper-slide" style="background-image: linear-gradient(45deg, #e74c3c, #f39c12);">
+                            <div class="banner-text" data-i18n="banner2">真人 美女荷官</div>
+                            <div class="jackpot-number">88,888,888.00</div>
+                        </div>
+                        <div class="swiper-slide" style="background-image: linear-gradient(45deg, #8e44ad, #3498db);">
+                            <div class="banner-text" data-i18n="banner3">体育 每日返水</div>
+                            <div class="jackpot-number">10,000,000.00</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="home-body">
+                <div class="side-menu">
+                    <div class="menu-item active" data-i18n="catHot">热门</div>
+                    <div class="menu-item" data-i18n="catLive">真人</div>
+                    <div class="menu-item" data-i18n="catSlot">电子</div>
+                    <div class="menu-item" data-i18n="catSport">体育</div>
+                </div>
+                <div class="game-grid">
+                    <div class="game-card"><div class="game-img" style="background:#e74c3c;"><i class="fas fa-futbol"></i></div><div class="game-title">皇冠体育</div></div>
+                    <div class="game-card"><div class="game-img" style="background:#8e44ad;"><i class="fas fa-user-tie"></i></div><div class="game-title">BBIN真人</div></div>
+                    <div class="game-card"><div class="game-img" style="background:#27ae60;"><i class="fas fa-dice"></i></div><div class="game-title">SOLAIRE</div></div>
+                    <div class="game-card"><div class="game-img" style="background:#f39c12;"><i class="fas fa-dragon"></i></div><div class="game-title">麻将胡了</div></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 优惠页 -->
+        <div id="page-promo" class="page">
+            <div style="padding: 40px 20px; text-align: center;">
+                <i class="fas fa-gift" style="font-size: 50px; color: var(--accent-gold); margin-bottom: 15px;"></i>
+                <h3 data-i18n="promoTitle">最新优惠活动</h3>
+                <p style="color: var(--text-sub); margin-top: 10px;" data-i18n="promoDesc">首存100%赠送 每日签到领红包</p>
+                
+                <div class="notice-section" style="margin-top: 30px; background: var(--card-bg); padding: 15px; border-radius: 8px;">
+                    <h4 data-i18n="notice">公告</h4>
+                    <div style="margin-top: 10px; font-size: 14px; color: var(--text-sub);">
+                        <p>✨ 新用户首存100%赠送</p>
+                        <p>🎁 每日签到领红包最高88元</p>
+                        <p>💰 返水比例业界最高</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 我的页面 -->
+        <div id="page-mine" class="page">
+            <div class="profile-header">
+                <div class="avatar"><i class="fas fa-user"></i></div>
+                <div class="user-info">
+                    <h2 id="username-display">尊贵的玩家_8821</h2>
+                    <span class="user-id" id="userid-display">ID: 95271234</span>
+                </div>
+            </div>
+            <div class="balance-card">
+                <div class="balance-label" data-i18n="totalBalance">总余额 (CNY)</div>
+                <div class="balance-amount">0.00</div>
+                <div class="action-btns">
+                    <button class="action-btn primary" onclick="openModal('deposit')" data-i18n="deposit">充值</button>
+                    <button class="action-btn" onclick="openModal('withdraw')" data-i18n="withdraw">提现</button>
+                </div>
+            </div>
+            <div class="menu-list">
+                <div class="list-group">
+                    <div class="list-item" onclick="openModal('bind-phone')"><span><i class="fas fa-mobile-alt"></i> <span data-i18n="bindPhone">绑定手机</span></span><i class="fas fa-chevron-right arrow"></i></div>
+                    <div class="list-item" onclick="openModal('bank-manage')"><span><i class="fas fa-university"></i> <span data-i18n="bankManage">银行卡管理</span></span><i class="fas fa-chevron-right arrow"></i></div>
+                    <div class="list-item" onclick="openModal('trans-history')"><span><i class="fas fa-history"></i> <span data-i18n="transRecord">存取款记录</span></span><i class="fas fa-chevron-right arrow"></i></div>
+                </div>
+                <div class="list-group">
+                    <div class="list-item" onclick="handleLogout()" style="color: #e74c3c;">
+                        <span><i class="fas fa-sign-out-alt" style="color: #e74c3c;"></i> <span data-i18n="logout">退出登录</span></span>
+                        <i class="fas fa-chevron-right arrow"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 登录弹窗 -->
+    <div id="modal-login" class="modal-page">
+        <div class="modal-header">
+            <h2 data-i18n="login">登录</h2>
+            <span class="close-modal" onclick="closeModal()"><i class="fas fa-times"></i></span>
+        </div>
+        <div class="phone-input-group">
+            <select class="form-input country-code">
+                <option value="+86">🇨🇳 +86</option>
+                <option value="+95">🇲🇲 +95</option>
+                <option value="+1">🇺🇸 +1</option>
+            </select>
+            <input type="tel" class="form-input phone-num" placeholder="请输入手机号">
+        </div>
+        <input type="password" class="form-input" id="login-password" placeholder="请输入密码">
+        <div class="form-tip error" id="login-tip"></div>
+        <button class="submit-btn" onclick="handleLogin()" data-i18n="loginBtn">确认登录</button>
+        <p style="text-align: center; margin-top: 20px; color: var(--text-sub); font-size: 14px;">
+            <span data-i18n="noAccount">还没有账号？</span>
+            <span style="color: var(--nav-active); cursor: pointer;" onclick="switchModal('register')" data-i18n="regNow">立即注册</span>
+        </p>
+    </div>
+
+    <!-- 注册弹窗 -->
+    <div id="modal-register" class="modal-page">
+        <div class="modal-header">
+            <h2 data-i18n="register">注册</h2>
+            <span class="close-modal" onclick="closeModal()"><i class="fas fa-times"></i></span>
+        </div>
+        <input type="text" class="form-input" placeholder="请输入用户名">
+        <input type="password" class="form-input" placeholder="请输入密码">
+        <input type="password" class="form-input" placeholder="请确认密码">
+        <button class="submit-btn" data-i18n="regBtn">确认注册</button>
+        <p style="text-align: center; margin-top: 20px; color: var(--text-sub); font-size: 14px;">
+            <span data-i18n="hasAccount">已有账号？</span>
+            <span style="color: var(--nav-active); cursor: pointer;" onclick="switchModal('login')" data-i18n="loginNow">立即登录</span>
+        </p>
+    </div>
+
+    <!-- 充值弹窗 -->
+    <div id="modal-deposit" class="modal-page">
+        <div class="modal-header">
+            <h2 data-i18n="deposit">充值</h2>
+            <span class="close-modal" onclick="closeModal()"><i class="fas fa-times"></i></span>
+        </div>
+        <label style="color: var(--text-sub); font-size: 12px;" data-i18n="depositAmount">充值金额</label>
+        <input type="number" class="form-input" id="deposit-amount" placeholder="请输入充值金额" min="1" max="999999">
+        <label style="color: var(--text-sub); font-size: 12px; margin-top: 10px;" data-i18n="selectBank">选择银行</label>
+        <select class="form-input" id="deposit-bank" onchange="loadBankForDeposit()">
+            <option value="">-- 选择银行卡 --</option>
+        </select>
+        <button class="submit-btn" onclick="handleDeposit()" data-i18n="confirmDeposit">确认充值</button>
+    </div>
+
+    <!-- 提现弹窗 -->
+    <div id="modal-withdraw" class="modal-page">
+        <div class="modal-header">
+            <h2 data-i18n="withdraw">提现</h2>
+            <span class="close-modal" onclick="closeModal()"><i class="fas fa-times"></i></span>
+        </div>
+        <label style="color: var(--text-sub); font-size: 12px;" data-i18n="withdrawAmount">提现金额</label>
+        <input type="number" class="form-input" id="withdraw-amount" placeholder="请输入提现金额" min="1" max="999999">
+        <label style="color: var(--text-sub); font-size: 12px; margin-top: 10px;" data-i18n="selectBank">选择银行</label>
+        <select class="form-input" id="withdraw-bank" onchange="loadBankForWithdraw()">
+            <option value="">-- 选择银行卡 --</option>
+        </select>
+        <button class="submit-btn" onclick="handleWithdraw()" data-i18n="confirmWithdraw">确认提现</button>
+    </div>
+
+    <!-- 绑定手机弹窗 -->
+    <div id="modal-bind-phone" class="modal-page">
+        <div class="modal-header">
+            <h2 data-i18n="bindPhone">绑定手机</h2>
+            <span class="close-modal" onclick="closeModal()"><i class="fas fa-times"></i></span>
+        </div>
+        <input type="tel" class="form-input" id="bind-phone" placeholder="请输入手机号">
+        <div style="display: flex; gap: 10px; margin-bottom: 15px;">
+            <input type="text" class="form-input" id="bind-code" placeholder="请输入验证码" style="flex: 1;">
+            <button class="form-input" id="send-code-btn" onclick="sendPhoneCode()" style="width: 100px; background: var(--primary-blue); color: #fff; cursor: pointer;" data-i18n="sendCode">发送验证码</button>
+        </div>
+        <button class="submit-btn" onclick="handleBindPhone()" data-i18n="confirmPhone">确认绑定</button>
+    </div>
+
+    <!-- 银行卡管理弹窗 -->
+    <div id="modal-bank-manage" class="modal-page">
+        <div class="modal-header">
+            <h2 data-i18n="bankManage">银行卡管理</h2>
+            <span class="close-modal" onclick="closeModal()"><i class="fas fa-times"></i></span>
+        </div>
+        <div id="bank-cards-list" style="margin-bottom: 20px;"></div>
+        <button class="submit-btn" onclick="openAddBankModal()" data-i18n="addBank">添加银行卡</button>
+    </div>
+
+    <!-- 添加银行卡弹窗 -->
+    <div id="modal-add-bank" class="modal-page">
+        <div class="modal-header">
+            <h2 data-i18n="addBank">添加银行卡</h2>
+            <span class="close-modal" onclick="closeModal()"><i class="fas fa-times"></i></span>
+        </div>
+        <input type="text" class="form-input" id="add-bank-name" placeholder="请输入银行名称">
+        <input type="text" class="form-input" id="add-card-number" placeholder="请输入卡号">
+        <input type="text" class="form-input" id="add-account-name" placeholder="请输入账户名">
+        <button class="submit-btn" onclick="handleAddBank()" data-i18n="confirmDeposit">确认添加</button>
+    </div>
+
+    <!-- 交易记录弹窗 -->
+    <div id="modal-trans-history" class="modal-page">
+        <div class="modal-header">
+            <h2 data-i18n="transRecord">交易记录</h2>
+            <span class="close-modal" onclick="closeModal()"><i class="fas fa-times"></i></span>
+        </div>
+        <div id="transaction-list" style="max-height: 500px; overflow-y: auto;"></div>
+    </div>
+
+    <!-- 客服悬浮按钮 -->
+    <div class="cs-float-btn" onclick="openModal('cs')">
+        <i class="fas fa-headset"></i>
+    </div>
+
+    <!-- 客服弹窗 -->
+    <div id="modal-cs" class="modal-page">
+        <div class="modal-header">
+            <h2 data-i18n="csTitle">联系客服</h2>
+            <span class="close-modal" onclick="closeModal()"><i class="fas fa-times"></i></span>
+        </div>
+        <div class="cs-options">
+            <button class="cs-btn telegram" onclick="API.openTelegram()">
+                <i class="fab fa-telegram-plane"></i>
+                <span data-i18n="csTG">纸飞机 (Telegram)</span>
+            </button>
+            <button class="cs-btn third-party" onclick="API.openThirdPartyCS()">
+                <i class="fas fa-comments"></i>
+                <span data-i18n="csThird">第三方在线客服</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- 底部导航栏 -->
+    <nav class="bottom-nav">
+        <div class="nav-item active" onclick="switchTab('home', this)"><i class="fas fa-home"></i><span data-i18n="navHome">首页</span></div>
+        <div class="nav-item" onclick="switchTab('promo', this)"><i class="fas fa-gift"></i><span data-i18n="navPromo">优惠</span></div>
+        <div class="nav-item center-btn" onclick="openModal('login')"><i class="fas fa-user-circle"></i></div>
+        <div class="nav-item" onclick="switchTab('mine', this)"><i class="fas fa-user"></i><span data-i18n="navMine">我的</span></div>
+        <div class="nav-item" onclick="openModal('cs')"><i class="fas fa-headset"></i><span data-i18n="navCS">客服</span></div>
+    </nav>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
